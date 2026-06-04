@@ -6,6 +6,7 @@ export default {
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
         display: ['Space Grotesk', 'sans-serif'],
+        serif: ['"Cormorant Garamond"', 'serif'],
       },
       colors: {
         ink: '#050816',

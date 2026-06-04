@@ -1,43 +1,100 @@
-import { motion } from 'framer-motion'
-import ScrollReveal from '../components/ScrollReveal'
-import Typewriter from '../components/Typewriter'
+import { Cpu, Cog, Brain, ShieldCheck, Globe, Smartphone } from 'lucide-react'
+import RadialOrbitalTimeline from '@/components/ui/radial-orbital-timeline'
 
-const domains = [
-  { title: 'Electrical', desc: 'Power systems, embedded electronics, and robotics control.', accent: 'from-cyan-400/30 to-cyan-300/5' },
-  { title: 'Mechanical', desc: 'CAD, fabrication, and durable robot mechanisms.', accent: 'from-sky-400/30 to-blue-300/5' },
-  { title: 'ML & AI', desc: 'Vision, perception, and intelligent autonomy pipelines.', accent: 'from-indigo-400/30 to-sky-300/5' },
-  { title: 'Cybersecurity', desc: 'Secure systems, connected devices, and threat awareness.', accent: 'from-fuchsia-400/30 to-pink-300/5' },
-  { title: 'Web Development', desc: 'Frontend and backend products for club and community tools.', accent: 'from-emerald-400/30 to-cyan-300/5' },
-  { title: 'App Development', desc: 'Mobile-first experiences that extend robotics workflows.', accent: 'from-violet-400/30 to-indigo-300/5' },
+const domainTimelineData = [
+  {
+    id: 1,
+    title: 'Electrical',
+    date: 'Core Domain',
+    content:
+      'Power systems, embedded electronics, and robotics control. Our electrical team designs circuits, builds PCBs, and programs microcontrollers that bring robots to life.',
+    category: 'Hardware',
+    icon: Cpu,
+    relatedIds: [2, 3],
+    status: 'completed',
+    energy: 95,
+  },
+  {
+    id: 2,
+    title: 'Mechanical',
+    date: 'Core Domain',
+    content:
+      'CAD modelling, 3D-printing, fabrication, and durable robot mechanisms. From combat bots to spider bots, every frame is designed and manufactured in-house.',
+    category: 'Hardware',
+    icon: Cog,
+    relatedIds: [1, 3],
+    status: 'completed',
+    energy: 90,
+  },
+  {
+    id: 3,
+    title: 'ML & AI',
+    date: 'Intelligence',
+    content:
+      'Computer vision, perception pipelines, and intelligent autonomy. Our AI team builds the brains that let robots see, decide, and act on their own.',
+    category: 'Software',
+    icon: Brain,
+    relatedIds: [1, 4],
+    status: 'in-progress',
+    energy: 80,
+  },
+  {
+    id: 4,
+    title: 'Cybersecurity',
+    date: 'Defense',
+    content:
+      'Secure systems, IoT hardening, and threat awareness. Protecting connected robots and club infrastructure from digital threats.',
+    category: 'Security',
+    icon: ShieldCheck,
+    relatedIds: [3, 5],
+    status: 'in-progress',
+    energy: 70,
+  },
+  {
+    id: 5,
+    title: 'Web Dev',
+    date: 'Digital',
+    content:
+      'Frontend and backend products for club and community tools. Building the digital presence that connects RoboVITics with the world.',
+    category: 'Software',
+    icon: Globe,
+    relatedIds: [4, 6],
+    status: 'completed',
+    energy: 85,
+  },
+  {
+    id: 6,
+    title: 'App Dev',
+    date: 'Mobile',
+    content:
+      'Mobile-first experiences that extend robotics workflows. Native apps for robot control, event management, and team collaboration.',
+    category: 'Software',
+    icon: Smartphone,
+    relatedIds: [5, 3],
+    status: 'in-progress',
+    energy: 65,
+  },
 ]
 
 export default function Domains() {
   return (
-    <section id="domains" className="section-shell py-12 sm:py-16">
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.7 }}
-      >
-        <p className="text-sm uppercase tracking-[0.35em] text-sky-100">Domains</p>
+    <section id="domains" className="relative py-12 sm:py-16">
+      {/* Section heading */}
+      <div className="section-shell mb-4">
+        <p className="text-sm uppercase tracking-[0.35em] text-sky-100">
+          Domains
+        </p>
         <h2 className="mt-3 font-display text-3xl text-white sm:text-4xl">
-          <Typewriter words={["Built across the full robotics stack."]} speed={100} delayBetweenWords={2000} cursorChar="|" />
+          Built across the full robotics stack.
         </h2>
-      </motion.div>
+        <p className="mt-2 text-sm text-slate-300/80">
+          Click a node to explore each domain. Connected nodes show related disciplines.
+        </p>
+      </div>
 
-      <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-        {domains.map((domain, index) => (
-          <ScrollReveal
-            key={domain.title}
-            className={`rounded-[24px] border border-white/10 bg-gradient-to-br ${domain.accent} p-[1px]`}
-          >
-            <div className="rounded-[23px] bg-slate-950/80 px-5 py-5">
-              <p className="font-display text-2xl text-white">{domain.title}</p>
-              <p className="mt-3 text-sm leading-7 text-slate-200/85">{domain.desc}</p>
-            </div>
-          </ScrollReveal>
-        ))}
+      {/* Orbital Timeline */}
+      <div className="relative w-full" style={{ height: '600px' }}>
+        <RadialOrbitalTimeline timelineData={domainTimelineData} />
       </div>
     </section>
   )
